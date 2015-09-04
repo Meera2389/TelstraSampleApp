@@ -118,19 +118,6 @@
     NSData *imageData = [NSData dataWithBytesNoCopy:bytes length:c freeWhenDone:YES];
     return imageData;
 }
--(BOOL)dataIsValidJPEG:(NSData *)data
-{
-    
-    //Due to less connectivity, some image data not received fully and they are corrupted. This functions checks for it .
-    if (!data || data.length < 2) return NO;
-    
-    NSInteger totalBytes = data.length;
-    const char *bytes = (const char*)[data bytes];
-    
-    return (bytes[0] == (char)0xff &&
-            bytes[1] == (char)0xd8 &&
-            bytes[totalBytes-2] == (char)0xff &&
-            bytes[totalBytes-1] == (char)0xd9);
-}
+
 @end
 
