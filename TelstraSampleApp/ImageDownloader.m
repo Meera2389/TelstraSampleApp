@@ -82,7 +82,6 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"error in image accessing is %@",error.description);
     [self serviceLoaded:nil];
 }
 
