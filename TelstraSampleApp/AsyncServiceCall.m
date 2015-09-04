@@ -20,6 +20,15 @@
     }
     return self;
 }
+/*----------------------------------------------------------------------------------
+ Method Name: callRequestBlock
+ Parameters: NSURLRequest
+ Descriptions:
+ This method will make a async call . If the its success checkService method is called
+ else failed status delegate method is called.
+ return type: nil
+ ----------------------------------------------------------------------------------*/
+
 -(void)callRequestBlock:(NSURLRequest*)request
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -42,6 +51,13 @@
     });
     
 }
+/*----------------------------------------------------------------------------------
+ Method Name: checkService
+ Parameters: NSData
+ Descriptions:
+ This method will parse the data into NSArray 
+ return type: nil
+ ----------------------------------------------------------------------------------*/
 
 -(void)checkService:(NSData*)receiveResponse
 {

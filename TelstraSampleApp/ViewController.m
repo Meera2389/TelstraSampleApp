@@ -52,7 +52,7 @@
    
 }
 -(void)viewWillAppear:(BOOL)animated {
-    [self syncClicked];
+    [self startDownload];
 
 
 
@@ -80,6 +80,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+/*----------------------------------------------------------------------------------
+ Method Name: initializeSpinner
+ Parameters:nil
+ Descriptions:
+ This method will initialize the spinner on the master data download section
+ return type: nil
+ ----------------------------------------------------------------------------------*/
 -(void)initializeSpinner
 {
     spinner=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -88,6 +95,13 @@
     CGRect bounds = [UIScreen mainScreen].bounds;
     spinner.center=CGPointMake(bounds.size.width/2, bounds.size.height/2);
 }
+/*----------------------------------------------------------------------------------
+ Method Name: startSpinner
+ Parameters:nil
+ Descriptions:
+ This method will add the spinner to the current view and start the animation
+ return type: nil
+ ----------------------------------------------------------------------------------*/
 -(void)startSpinner
 {
     [self.view addSubview:spinner];
@@ -96,7 +110,15 @@
     [spinner startAnimating];
     
 }
--(void)stopSpinner{
+/*----------------------------------------------------------------------------------
+ Method Name: stopSpinner
+ Parameters:nil
+ Descriptions:
+ This method will stop the animation of the spinner and remove it from super view
+ return type: nil
+ ----------------------------------------------------------------------------------*/
+-(void)stopSpinner
+{
     [spinner stopAnimating];
     [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     [spinner removeFromSuperview];
@@ -116,6 +138,7 @@
     [detailTableView reloadRowsAtIndexPaths:visiblePaths withRowAnimation:UITableViewRowAnimationNone];
     
 }
+# pragma marks -UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self reloadBrandsOnScroll];
@@ -126,24 +149,23 @@
 {
     [self reloadBrandsOnScroll];
 }
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section
 {
     return [detailArray count];
 }
 
-// the cell will be returned to the tableView
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"HistoryCell";
     
-    // Similar to UITableViewCell, but
     CustomCell *cell = (CustomCell *)[theTableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSString *content=[self checkNull:[[detailArray objectAtIndex:indexPath.row] valueForKey:@"description"]];
     cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier :content];
     [detailTableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     
-    
+    //data is added to the custom cell
     cell.descriptionTitle.text =[self checkNull: [[detailArray objectAtIndex:indexPath.row] valueForKey:@"title"]];
     cell.descriptionText.text=[self checkNull:[[detailArray objectAtIndex:indexPath.row] valueForKey:@"description"]];
     cell.descriptionText.lineBreakMode = NSLineBreakByWordWrapping;
@@ -156,6 +178,8 @@
         [cell.indicatorView startAnimating];
         [cell.indicatorView setHidden:NO];
 
+        
+        //code for lazy loading of the image 
         NSString *imageUrl=[self checkNull:[[detailArray objectAtIndex:indexPath.row] valueForKey:@"imageHref"]];
         
         if (detailTableView.dragging == NO && detailTableView.decelerating == NO && ![imageUrl isEqualToString:@""])
@@ -164,7 +188,6 @@
             newcall.serviceURL=imageUrl;
             newcall.imgLoad=cell.descriptionImage;
             newcall.delegate=self;
-            newcall.imageKey=@"_big.jpg";
             newcall.load=cell.indicatorView;
             newcall.key=cellId;
             [newcall start];
@@ -197,6 +220,13 @@
         return ktableViewCellPadding;
     
 }
+/*----------------------------------------------------------------------------------
+ Method Name: checkNull
+ Parameters: NSString
+ Descriptions:
+ This method is NULL check for the input string
+ return type: NSString
+ ----------------------------------------------------------------------------------*/
 -(NSString*)checkNull:(NSString*)value
 {
     if([value isEqual:[NSNull null]]){
@@ -204,36 +234,58 @@
     }
     return value;
 }
-#pragma mark - async delegate method
--(void)receiveSuccessResponse:(NSArray*)parsedResponse
+
+/*----------------------------------------------------------------------------------
+ Method Name: setUpUI
+ Parameters: NSArray
+ Descriptions:
+ This method is to set up the UI after the data is recieved from Master data download
+ return type: nil
+ ----------------------------------------------------------------------------------*/
+-(void)setUpUI :(NSArray *)parsedResponse
 {
-    
-    [self stopSpinner];
     self.waitingForResponse = false;
     CGRect frame = [UIScreen mainScreen].bounds;
-
+    
     detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(frame.origin.x, title.frame.size.height+title.frame.origin.y, frame.size.width, frame.size.height-titleHeight) style:UITableViewStylePlain];
-
     [sync setBackgroundImage:[UIImage imageNamed:@"Download"] forState:UIControlStateNormal];
-    [sync addTarget:self action:@selector(syncClicked) forControlEvents:UIControlEventTouchUpInside];
+    [sync addTarget:self action:@selector(startDownload) forControlEvents:UIControlEventTouchUpInside];
     [sync setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.view addSubview:detailTableView];
     detailTableView.delegate = self;
     detailTableView.dataSource = self;
     
-
+    
     title.text=[parsedResponse valueForKey:@"title"];
     title.textAlignment = NSTextAlignmentCenter;
+    
 
-    NSArray *arr=[[NSArray alloc]initWithArray:[parsedResponse valueForKey:@"rows"]];
-    detailArray=[[NSMutableArray alloc]init];
-    for(NSDictionary *dict in arr){
-        if(![[self checkNull:[dict objectForKey:@"title"]]isEqualToString:@""]){
-           [detailArray addObject:dict];
-        }
-    }
-    [detailTableView reloadData];
+    
 }
+#pragma mark - async delegate method
+-(void)receiveSuccessResponse:(NSArray*)parsedResponse
+{
+    
+    [self stopSpinner];
+    if([parsedResponse count]>0){
+        [self setUpUI:parsedResponse];
+        NSArray *arr=[[NSArray alloc]initWithArray:[parsedResponse valueForKey:@"rows"]];
+        detailArray=[[NSMutableArray alloc]init];
+        for(NSDictionary *dict in arr){
+            if(![[self checkNull:[dict objectForKey:@"title"]]isEqualToString:@""]|| ![[self checkNull:[dict objectForKey:@"description"]]isEqualToString:@""] || ![[self checkNull:[dict objectForKey:@"imageHref"]]isEqualToString:@""]){
+                [detailArray addObject:dict];
+            }
+        }
+        [detailTableView reloadData];
+    }
+    
+}
+-(void)failedStatus:(NSError *)error
+{
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Telstra" message:@"There was a communication error please try later" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alert show];
+}
+#pragma marks-UIViewControllerRotation
 
 - (BOOL)shouldAutorotate {
     
@@ -252,7 +304,7 @@
     else{
         CGRect frame = [UIScreen mainScreen].bounds;
 
-        CGRect tableViewFrame = CGRectMake(frame.origin.x, title.frame.size.height+title.frame.origin.y, 703, self.view.frame.size.height-titleHeight);
+        CGRect tableViewFrame = CGRectMake(frame.origin.x, title.frame.size.height+title.frame.origin.y, frame.size.width, self.view.frame.size.height-titleHeight);
         detailTableView.frame = tableViewFrame;
         [detailTableView reloadData];
         title.frame=CGRectMake([UIScreen mainScreen].bounds.size.width/2-100, 10, 200, 50) ;
@@ -275,6 +327,7 @@
    
 }
 
+#pragma marks -delegate method for ImageDownloader
 -(void)returnImages:(id)imgLoad :(NSString*)key andActivityLoad:(id)activityLoad
 {
     if( [imgLoad isKindOfClass:[UIImageView class]])
@@ -298,7 +351,14 @@
 
 
 }
--(void)syncClicked{
+/*----------------------------------------------------------------------------------
+ Method Name: startDownload
+ Parameters: nil
+ Descriptions:
+ This method is to start the master data download
+ return type: nil
+ ----------------------------------------------------------------------------------*/
+-(void)startDownload{
     [self initializeSpinner];
     [self startSpinner];
     self.waitingForResponse = YES;
@@ -309,9 +369,14 @@
    
     connections=[[NSMutableArray alloc]init];
     
-
 }
-
+/*----------------------------------------------------------------------------------
+ Method Name: findSizeOfString
+ Parameters: NSString,UIView,CGFloat
+ Descriptions:
+ This method is to find the size of the string to set of the width of the label
+ return type: CGSize
+ ----------------------------------------------------------------------------------*/
 
 + (CGSize)findSizeOfString:(NSString *)string andView:(UIView *)viewItem andWidth:(CGFloat)width {
     UIFont *font = [UIFont fontWithName:@"Helvetica" size:14.0];

@@ -25,6 +25,8 @@
     if (self) {
         //configure view
         [self setBackgroundColor:[UIColor colorWithRed:208.0/255.0 green:208.0/255.0 blue:208.0/255.0 alpha:1.0]];
+        [self setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44.0)];
+        
         // configure control(s)
         self.descriptionTitle = [[UILabel alloc] initWithFrame:CGRectMake(5, 15, 300, DescriptionTitleHeight)];
         self.descriptionTitle.textColor = [UIColor colorWithRed:66.0/255.0 green:41.0/255.0 blue:161.0/255.0 alpha:1.0];
@@ -42,6 +44,7 @@
         self.indicatorView=[[UIActivityIndicatorView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-ImagePadding, self.descriptionText.frame.origin.y, DescriptionIndicatorHeight, DescriptionIndicatorHeight)];
         [self.indicatorView setHidden:YES];
         [self.indicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+        
         [self addSubview:self.descriptionTitle];
         [self addSubview:self.descriptionText];
         [self addSubview:self.indicatorView];
