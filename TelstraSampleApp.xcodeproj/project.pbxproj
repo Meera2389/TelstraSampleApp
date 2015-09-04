@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9623235A1B9840130054296C /* Download.png in Resources */ = {isa = PBXBuildFile; fileRef = 962323591B9840130054296C /* Download.png */; };
+		9623235E1B99BC2F0054296C /* Sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 9623235D1B99BC2E0054296C /* Sync.png */; };
 		96B7D1CE1B96C43E00DC5D5F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B7D1CD1B96C43E00DC5D5F /* main.m */; };
 		96B7D1D11B96C43E00DC5D5F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B7D1D01B96C43E00DC5D5F /* AppDelegate.m */; };
 		96B7D1D41B96C43E00DC5D5F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B7D1D31B96C43E00DC5D5F /* ViewController.m */; };
@@ -35,7 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		962323591B9840130054296C /* Download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Download.png; sourceTree = "<group>"; };
+		9623235D1B99BC2E0054296C /* Sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sync.png; sourceTree = "<group>"; };
 		96B7D1C81B96C43E00DC5D5F /* TelstraSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelstraSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B7D1CC1B96C43E00DC5D5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96B7D1CD1B96C43E00DC5D5F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -109,6 +109,14 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		9623235F1B99BC3B0054296C /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9623235D1B99BC2E0054296C /* Sync.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		96B7D1BF1B96C43E00DC5D5F = {
 			isa = PBXGroup;
 			children = (
@@ -135,9 +143,9 @@
 		96B7D1CA1B96C43E00DC5D5F /* TelstraSampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				962323591B9840130054296C /* Download.png */,
 				96B7D1D51B96C43E00DC5D5F /* Main.storyboard */,
 				96B7D1D81B96C43E00DC5D5F /* Images.xcassets */,
+				9623235F1B99BC3B0054296C /* Images */,
 				96B7D1DA1B96C43E00DC5D5F /* LaunchScreen.xib */,
 				96B7D1CB1B96C43E00DC5D5F /* Supporting Files */,
 				9623235C1B986C1B0054296C /* Classes */,
@@ -251,7 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9623235A1B9840130054296C /* Download.png in Resources */,
+				9623235E1B99BC2F0054296C /* Sync.png in Resources */,
 				96B7D1D71B96C43E00DC5D5F /* Main.storyboard in Resources */,
 				96B7D1DC1B96C43E00DC5D5F /* LaunchScreen.xib in Resources */,
 				96B7D1D91B96C43E00DC5D5F /* Images.xcassets in Resources */,

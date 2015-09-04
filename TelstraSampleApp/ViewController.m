@@ -45,14 +45,14 @@
     async.delegate=self;
     title=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-titleWidth/2, 10, titleWidth, titleHeight)];
     [self.view addSubview:title];
-    sync=[[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-syncWidth, 10, syncWidth, syncHeight)];
+    sync=[[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-syncWidth, 15, syncWidth, syncHeight)];
     [self.view addSubview:sync];
     self.waitingForResponse = NO;
+    [self startDownload];
 
    
 }
 -(void)viewWillAppear:(BOOL)animated {
-    [self startDownload];
 
 
 
@@ -248,7 +248,7 @@
     CGRect frame = [UIScreen mainScreen].bounds;
     
     detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(frame.origin.x, title.frame.size.height+title.frame.origin.y, frame.size.width, frame.size.height-titleHeight) style:UITableViewStylePlain];
-    [sync setBackgroundImage:[UIImage imageNamed:@"Download"] forState:UIControlStateNormal];
+    [sync setBackgroundImage:[UIImage imageNamed:@"Sync"] forState:UIControlStateNormal];
     [sync addTarget:self action:@selector(startDownload) forControlEvents:UIControlEventTouchUpInside];
     [sync setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.view addSubview:detailTableView];
@@ -259,7 +259,7 @@
     title.text=[parsedResponse valueForKey:@"title"];
     title.textAlignment = NSTextAlignmentCenter;
     
-
+    
     
 }
 #pragma mark - async delegate method
@@ -298,7 +298,7 @@
         detailTableView.frame = tableViewFrame;
         [detailTableView reloadData];
         title.frame=CGRectMake([UIScreen mainScreen].bounds.size.width/2-100, 10, 200, 50) ;
-        sync.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-40, 10, 40, 40);
+        sync.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-40, 15, 40, 40);
 
     }
     else{
@@ -308,7 +308,7 @@
         detailTableView.frame = tableViewFrame;
         [detailTableView reloadData];
         title.frame=CGRectMake([UIScreen mainScreen].bounds.size.width/2-100, 10, 200, 50) ;
-        sync.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-40, 10, 40, 40);
+        sync.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-40, 15, 40, 40);
 
 
     }
