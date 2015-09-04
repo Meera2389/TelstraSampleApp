@@ -165,6 +165,16 @@
     cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier :content];
     [detailTableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     
+    
+    if (indexPath.row % 2 ==0) {
+        
+        [cell setBackgroundColor:[UIColor colorWithRed:208.0/255.0 green:208.0/255.0 blue:208.0/255.0 alpha:1.0]];
+    }
+    else{
+        [cell setBackgroundColor:[UIColor colorWithRed:125.0/255.0 green:125.0/255.0 blue:125.0/255.0 alpha:1.0]];
+
+    }
+
     //data is added to the custom cell
     cell.descriptionTitle.text =[self checkNull: [[detailArray objectAtIndex:indexPath.row] valueForKey:@"title"]];
     cell.descriptionText.text=[self checkNull:[[detailArray objectAtIndex:indexPath.row] valueForKey:@"description"]];
