@@ -18,4 +18,11 @@
 #define syncWidth   40
 #define ktableViewCellPadding 100
 #define kDefaultCellHeight 104
+
+#define DescriptionTitleHeight 20
+#define DescriptionImageHeight 50
+#define DescriptionIndicatorHeight 40
+#define ImagePadding 80
+
+
 @end

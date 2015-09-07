@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Constants.h"
 
 @interface CustomCell : UITableViewCell
 @property (nonatomic, strong) UILabel *descriptionTitle;
 @property(nonatomic,strong) UIImageView *descriptionImage;
 @property(nonatomic,strong) UILabel *descriptionText;
 @property(nonatomic,strong) UIActivityIndicatorView *indicatorView;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier :(NSString *) content;
 
 @end

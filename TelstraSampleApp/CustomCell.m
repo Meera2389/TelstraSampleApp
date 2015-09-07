@@ -8,10 +8,7 @@
 
 #import "CustomCell.h"
 
-#define DescriptionTitleHeight 20
-#define DescriptionImageHeight 50
-#define DescriptionIndicatorHeight 40
-#define ImagePadding 80
+
 
 @implementation CustomCell
 @synthesize descriptionTitle;

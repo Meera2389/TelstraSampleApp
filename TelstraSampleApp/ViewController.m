@@ -36,14 +36,15 @@
     imgDict = [NSMutableDictionary dictionary];
     async=[[AsyncServiceCall alloc]init];
     async.delegate=self;
+    
     title=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-titleWidth/2, 10, titleWidth, titleHeight)];
     [self.view addSubview:title];
     sync=[[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-syncWidth, 15, syncWidth, syncHeight)];
+    
     [self.view addSubview:sync];
     self.waitingForResponse = NO;
     [self startDownload];
-
-   
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -222,7 +223,6 @@
     
     
     NSString *content = [self checkNull:[[detailArray objectAtIndex:indexPath.row] valueForKey:@"description"]];
-    
     CGSize sizeForHeight = [ViewController findSizeOfString:content andView:tableView andWidth:tableView.frame.size.width];
     
     
@@ -263,15 +263,14 @@
     [sync setBackgroundImage:[UIImage imageNamed:@"Sync"] forState:UIControlStateNormal];
     [sync addTarget:self action:@selector(startDownload) forControlEvents:UIControlEventTouchUpInside];
     [sync setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
     [self.view addSubview:detailTableView];
+    
     detailTableView.delegate = self;
     detailTableView.dataSource = self;
     
-    
     title.text=[parsedResponse valueForKey:@"title"];
     title.textAlignment = NSTextAlignmentCenter;
-    
-    
     
 }
 #pragma mark - async delegate method
@@ -359,10 +358,6 @@
 
         }
     }
-    
-    
-
-
 }
 /*----------------------------------------------------------------------------------
  Method Name: startDownload
@@ -372,8 +367,10 @@
  return type: nil
  ----------------------------------------------------------------------------------*/
 -(void)startDownload{
+    
     [self initializeSpinner];
     [self startSpinner];
+    
     self.waitingForResponse = YES;
     NSURL *url= [NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/746330/facts.json"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy
