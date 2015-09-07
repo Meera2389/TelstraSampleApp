@@ -144,6 +144,14 @@
 			name = TableViewCustomCell;
 			sourceTree = "<group>";
 		};
+		9643BB2D1B9D85C0000915FC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				96B7D1DA1B96C43E00DC5D5F /* LaunchScreen.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		96B7D1BF1B96C43E00DC5D5F = {
 			isa = PBXGroup;
 			children = (
@@ -170,10 +178,10 @@
 		96B7D1CA1B96C43E00DC5D5F /* TelstraSampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				9643BB2D1B9D85C0000915FC /* View */,
 				9643BB2A1B9D8465000915FC /* ViewControllers */,
 				9643BB2B1B9D848A000915FC /* Common */,
 				96B7D1D81B96C43E00DC5D5F /* Images.xcassets */,
-				96B7D1DA1B96C43E00DC5D5F /* LaunchScreen.xib */,
 				96B7D1CB1B96C43E00DC5D5F /* Supporting Files */,
 			);
 			path = TelstraSampleApp;
