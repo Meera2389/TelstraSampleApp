@@ -12,7 +12,6 @@
 		96B7D1CE1B96C43E00DC5D5F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B7D1CD1B96C43E00DC5D5F /* main.m */; };
 		96B7D1D11B96C43E00DC5D5F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B7D1D01B96C43E00DC5D5F /* AppDelegate.m */; };
 		96B7D1D41B96C43E00DC5D5F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B7D1D31B96C43E00DC5D5F /* ViewController.m */; };
-		96B7D1D71B96C43E00DC5D5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96B7D1D51B96C43E00DC5D5F /* Main.storyboard */; };
 		96B7D1D91B96C43E00DC5D5F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96B7D1D81B96C43E00DC5D5F /* Images.xcassets */; };
 		96B7D1DC1B96C43E00DC5D5F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B7D1DA1B96C43E00DC5D5F /* LaunchScreen.xib */; };
 		96B7D1E81B96C43E00DC5D5F /* TelstraSampleAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B7D1E71B96C43E00DC5D5F /* TelstraSampleAppTests.m */; };
@@ -46,7 +45,6 @@
 		96B7D1D01B96C43E00DC5D5F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		96B7D1D21B96C43E00DC5D5F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		96B7D1D31B96C43E00DC5D5F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		96B7D1D61B96C43E00DC5D5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96B7D1D81B96C43E00DC5D5F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		96B7D1DB1B96C43E00DC5D5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		96B7D1E11B96C43E00DC5D5F /* TelstraSampleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TelstraSampleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,15 +99,12 @@
 		9623235C1B986C1B0054296C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9643BB2C1B9D8507000915FC /* TableViewCustomCell */,
 				9623235B1B986BDA0054296C /* ServiceHandler */,
-				96B7D1CF1B96C43E00DC5D5F /* AppDelegate.h */,
-				96B7D1D01B96C43E00DC5D5F /* AppDelegate.m */,
 				96B7D1D21B96C43E00DC5D5F /* ViewController.h */,
 				96B7D1D31B96C43E00DC5D5F /* ViewController.m */,
-				96B7D1F11B96C62300DC5D5F /* CustomCell.h */,
-				96B7D1F21B96C62300DC5D5F /* CustomCell.m */,
-				9643BB261B9D5AE4000915FC /* Constants.h */,
-				9643BB271B9D5AE4000915FC /* Constants.m */,
+				96B7D1CF1B96C43E00DC5D5F /* AppDelegate.h */,
+				96B7D1D01B96C43E00DC5D5F /* AppDelegate.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -120,6 +115,33 @@
 				9623235D1B99BC2E0054296C /* Sync.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		9643BB2A1B9D8465000915FC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9623235C1B986C1B0054296C /* Classes */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9643BB2B1B9D848A000915FC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				9643BB261B9D5AE4000915FC /* Constants.h */,
+				9643BB271B9D5AE4000915FC /* Constants.m */,
+				9623235F1B99BC3B0054296C /* Images */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		9643BB2C1B9D8507000915FC /* TableViewCustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				96B7D1F11B96C62300DC5D5F /* CustomCell.h */,
+				96B7D1F21B96C62300DC5D5F /* CustomCell.m */,
+			);
+			name = TableViewCustomCell;
 			sourceTree = "<group>";
 		};
 		96B7D1BF1B96C43E00DC5D5F = {
@@ -148,12 +170,11 @@
 		96B7D1CA1B96C43E00DC5D5F /* TelstraSampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				96B7D1D51B96C43E00DC5D5F /* Main.storyboard */,
+				9643BB2A1B9D8465000915FC /* ViewControllers */,
+				9643BB2B1B9D848A000915FC /* Common */,
 				96B7D1D81B96C43E00DC5D5F /* Images.xcassets */,
 				96B7D1DA1B96C43E00DC5D5F /* LaunchScreen.xib */,
 				96B7D1CB1B96C43E00DC5D5F /* Supporting Files */,
-				9623235F1B99BC3B0054296C /* Images */,
-				9623235C1B986C1B0054296C /* Classes */,
 			);
 			path = TelstraSampleApp;
 			sourceTree = "<group>";
@@ -265,7 +286,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9623235E1B99BC2F0054296C /* Sync.png in Resources */,
-				96B7D1D71B96C43E00DC5D5F /* Main.storyboard in Resources */,
 				96B7D1DC1B96C43E00DC5D5F /* LaunchScreen.xib in Resources */,
 				96B7D1D91B96C43E00DC5D5F /* Images.xcassets in Resources */,
 			);
@@ -314,14 +334,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		96B7D1D51B96C43E00DC5D5F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				96B7D1D61B96C43E00DC5D5F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		96B7D1DA1B96C43E00DC5D5F /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

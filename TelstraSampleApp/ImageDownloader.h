@@ -7,8 +7,9 @@
 
 @protocol ImageDownloaderDelegate <NSObject>
 
--(void)returnImages:(id)imgLoad :(NSString*)key andActivityLoad:(id)activityLoad;
+@optional
 
+-(void)returnImages:(id)imgLoad :(NSString*)key andActivityLoad:(id)activityLoad;
 
 @end
 @interface ImageDownloader : NSObject
@@ -25,6 +26,5 @@
 @property(weak,nonatomic)id<ImageDownloaderDelegate> delegate;
 @property (nonatomic, strong)   NSURLConnection *imageConnection;
 
--(NSData*)returnImageData:(NSDictionary *)resultData;
 - (void)start;
 @end

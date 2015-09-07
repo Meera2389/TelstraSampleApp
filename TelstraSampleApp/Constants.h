@@ -11,18 +11,20 @@
 @interface Constants : NSObject
 
 
-#define titleHeight 50
-#define titleWidth 200
+#define kTitleHeight 50
+#define kTitleWidth 200
 
-#define syncHeight  40
-#define syncWidth   40
+#define kSyncHeight  40
+#define kSyncWidth   40
 #define ktableViewCellPadding 100
 #define kDefaultCellHeight 104
 
-#define DescriptionTitleHeight 20
-#define DescriptionImageHeight 50
-#define DescriptionIndicatorHeight 40
-#define ImagePadding 80
+#define kDescriptionTitleHeight 20
+#define kDescriptionImageHeight 50
+#define kDescriptionIndicatorHeight 40
+#define kImagePadding 80
+
+#define kMasterDataDownloadUrl @"https://dl.dropboxusercontent.com/u/746330/facts.json"
 
 
 @end

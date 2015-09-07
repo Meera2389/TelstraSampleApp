@@ -109,33 +109,6 @@
     
 }
 
-#pragma mark NSOperation Specific Methods
-
--(NSData*)returnImageData:(NSDictionary *)resultData
-{
-    NSDictionary *tempDic = [resultData valueForKey:@""];
-    
-    NSArray *base64Image = [tempDic valueForKey:imageKey];
-    
-    return [ImageDownloader bytearraytoimage:base64Image];
-}
-+(NSData*)bytearraytoimage:(NSArray*)byteArray
-{
-    
-    unsigned c = byteArray.count;
-    uint8_t *bytes = malloc(sizeof(*bytes) * c);
-    
-    unsigned i;
-    for (i = 0; i < c; i++)
-    {
-        NSString *str = [byteArray objectAtIndex:i];
-        int byte = [str intValue];
-        bytes[i] = byte;
-    }
-    
-    NSData *imageData = [NSData dataWithBytesNoCopy:bytes length:c freeWhenDone:YES];
-    return imageData;
-}
 
 @end
 

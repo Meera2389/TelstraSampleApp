@@ -37,9 +37,9 @@
     async=[[AsyncServiceCall alloc]init];
     async.delegate=self;
     
-    title=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-titleWidth/2, 10, titleWidth, titleHeight)];
+    title=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-kTitleWidth/2, 10, kTitleWidth, kTitleHeight)];
     [self.view addSubview:title];
-    sync=[[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-syncWidth, 15, syncWidth, syncHeight)];
+    sync=[[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-kSyncWidth, 15, kSyncWidth, kSyncHeight)];
     
     [self.view addSubview:sync];
     self.waitingForResponse = NO;
@@ -259,7 +259,7 @@
     self.waitingForResponse = false;
     CGRect frame = [UIScreen mainScreen].bounds;
     
-    detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(frame.origin.x, title.frame.size.height+title.frame.origin.y, frame.size.width, frame.size.height-titleHeight) style:UITableViewStylePlain];
+    detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(frame.origin.x, title.frame.size.height+title.frame.origin.y, frame.size.width, frame.size.height-kTitleHeight) style:UITableViewStylePlain];
     [sync setBackgroundImage:[UIImage imageNamed:@"Sync"] forState:UIControlStateNormal];
     [sync addTarget:self action:@selector(startDownload) forControlEvents:UIControlEventTouchUpInside];
     [sync setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -308,21 +308,21 @@
     if (orientation == UIInterfaceOrientationPortrait) {
         CGRect frame = [UIScreen mainScreen].bounds;
 
-        CGRect tableViewFrame = CGRectMake(frame.origin.x, title.frame.size.height+title.frame.origin.y, frame.size.width, frame.size.height-titleHeight);
+        CGRect tableViewFrame = CGRectMake(frame.origin.x, title.frame.size.height+title.frame.origin.y, frame.size.width, frame.size.height-kTitleHeight);
         detailTableView.frame = tableViewFrame;
         [detailTableView reloadData];
-        title.frame=CGRectMake([UIScreen mainScreen].bounds.size.width/2-titleWidth/2, 10, titleWidth, titleHeight) ;
-        sync.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-40, 15, syncWidth, syncHeight);
+        title.frame=CGRectMake([UIScreen mainScreen].bounds.size.width/2-kTitleWidth/2, 10, kTitleWidth, kTitleHeight) ;
+        sync.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-40, 15, kSyncWidth, kSyncHeight);
 
     }
     else{
         CGRect frame = [UIScreen mainScreen].bounds;
 
-        CGRect tableViewFrame = CGRectMake(frame.origin.x, title.frame.size.height+title.frame.origin.y, frame.size.width, self.view.frame.size.height-titleHeight);
+        CGRect tableViewFrame = CGRectMake(frame.origin.x, title.frame.size.height+title.frame.origin.y, frame.size.width, self.view.frame.size.height-kTitleHeight);
         detailTableView.frame = tableViewFrame;
         [detailTableView reloadData];
-        title.frame=CGRectMake([UIScreen mainScreen].bounds.size.width/2-titleWidth/2, 10, titleWidth, titleHeight) ;
-        sync.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-syncWidth, 15, syncWidth, syncHeight);
+        title.frame=CGRectMake([UIScreen mainScreen].bounds.size.width/2-kTitleWidth/2, 10, kTitleWidth, kTitleHeight) ;
+        sync.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-kSyncWidth, 15, kSyncWidth, kSyncHeight);
 
 
     }
@@ -372,7 +372,7 @@
     [self startSpinner];
     
     self.waitingForResponse = YES;
-    NSURL *url= [NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/746330/facts.json"];
+    NSURL *url= [NSURL URLWithString:kMasterDataDownloadUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy
                                           timeoutInterval:60.0];
     [async callRequestBlock:request];
