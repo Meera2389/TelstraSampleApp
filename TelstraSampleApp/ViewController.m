@@ -8,14 +8,7 @@
 
 #import "ViewController.h"
 #import "CustomCell.h"
-
-#define titleHeight 50
-#define titleWidth 200
-
-#define syncHeight  40
-#define syncWidth   40
-#define ktableViewCellPadding 100
-#define kDefaultCellHeight 104
+#import "Constants.h"
 
 @interface ViewController ()
 {
@@ -52,19 +45,22 @@
 
    
 }
--(void)viewWillAppear:(BOOL)animated {
 
-
-
-}
 -(void)viewWillDisappear:(BOOL)animated{
 
     [self clearConnections];
 
 }
+/*----------------------------------------------------------------------------------
+ Method Name: clearConnections
+ Parameters:nil
+ Descriptions:
+ This method will remove all the connections going on when the current view disappears.
+ return type: nil
+ ----------------------------------------------------------------------------------*/
+
 -(void)clearConnections
 {
-    
     
     for(NSURLConnection *connection in self.connections)
         [connection cancel];
@@ -87,6 +83,7 @@
  This method will initialize the spinner on the master data download section
  return type: nil
  ----------------------------------------------------------------------------------*/
+
 -(void)initializeSpinner
 {
     spinner=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -102,6 +99,7 @@
  This method will add the spinner to the current view and start the animation
  return type: nil
  ----------------------------------------------------------------------------------*/
+
 -(void)startSpinner
 {
     [self.view addSubview:spinner];
@@ -117,12 +115,14 @@
  This method will stop the animation of the spinner and remove it from super view
  return type: nil
  ----------------------------------------------------------------------------------*/
+
 -(void)stopSpinner
 {
     [spinner stopAnimating];
     [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     [spinner removeFromSuperview];
 }
+
 /*----------------------------------------------------------------------------------
  Method Name: reloadBrandsOnScroll
  Parameters:nil
@@ -139,6 +139,7 @@
     
 }
 # pragma marks -UIScrollViewDelegate
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self reloadBrandsOnScroll];
@@ -151,6 +152,7 @@
 }
 
 #pragma mark - UITableViewDataSource
+
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section
 {
     return [detailArray count];
@@ -275,13 +277,16 @@
 #pragma mark - async delegate method
 -(void)receiveSuccessResponse:(NSArray*)parsedResponse
 {
-    
     [self stopSpinner];
+    // If the response is not empty will set up the UI and table view is loaded .
     if([parsedResponse count]>0){
+        
         [self setUpUI:parsedResponse];
         NSArray *arr=[[NSArray alloc]initWithArray:[parsedResponse valueForKey:@"rows"]];
         detailArray=[[NSMutableArray alloc]init];
+        
         for(NSDictionary *dict in arr){
+            
             if(![[self checkNull:[dict objectForKey:@"title"]]isEqualToString:@""]|| ![[self checkNull:[dict objectForKey:@"description"]]isEqualToString:@""] || ![[self checkNull:[dict objectForKey:@"imageHref"]]isEqualToString:@""]){
                 [detailArray addObject:dict];
             }
@@ -307,8 +312,8 @@
         CGRect tableViewFrame = CGRectMake(frame.origin.x, title.frame.size.height+title.frame.origin.y, frame.size.width, frame.size.height-titleHeight);
         detailTableView.frame = tableViewFrame;
         [detailTableView reloadData];
-        title.frame=CGRectMake([UIScreen mainScreen].bounds.size.width/2-100, 10, 200, 50) ;
-        sync.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-40, 15, 40, 40);
+        title.frame=CGRectMake([UIScreen mainScreen].bounds.size.width/2-titleWidth/2, 10, titleWidth, titleHeight) ;
+        sync.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-40, 15, syncWidth, syncHeight);
 
     }
     else{
@@ -317,8 +322,8 @@
         CGRect tableViewFrame = CGRectMake(frame.origin.x, title.frame.size.height+title.frame.origin.y, frame.size.width, self.view.frame.size.height-titleHeight);
         detailTableView.frame = tableViewFrame;
         [detailTableView reloadData];
-        title.frame=CGRectMake([UIScreen mainScreen].bounds.size.width/2-100, 10, 200, 50) ;
-        sync.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-40, 15, 40, 40);
+        title.frame=CGRectMake([UIScreen mainScreen].bounds.size.width/2-titleWidth/2, 10, titleWidth, titleHeight) ;
+        sync.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-syncWidth, 15, syncWidth, syncHeight);
 
 
     }
@@ -327,9 +332,7 @@
 }
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    CGRect bounds = [UIScreen mainScreen].bounds;
     if(self.waitingForResponse) {
-        NSLog(@"%f",bounds.size.width);
         [spinner removeFromSuperview];
         [self initializeSpinner];
         [self startSpinner];
@@ -380,6 +383,7 @@
     connections=[[NSMutableArray alloc]init];
     
 }
+
 /*----------------------------------------------------------------------------------
  Method Name: findSizeOfString
  Parameters: NSString,UIView,CGFloat

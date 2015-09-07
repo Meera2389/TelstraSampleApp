@@ -11,6 +11,16 @@
 @implementation ImageDownloader
 @synthesize imgLoad,serviceURL,key,load,delegate,imageKey;
 @synthesize imageConnection;
+
+/*----------------------------------------------------------------------------------
+ Method Name: start
+ Parameters:nil
+ Descriptions:
+ This method start the async call for downloading the image . Once the image is downloaded
+ it is set to the imageview object in imgLoad.
+ 
+ return type: nil
+ ----------------------------------------------------------------------------------*/
 - (void)start
 {
     async=[[AsyncServiceCall alloc]init];
@@ -25,6 +35,7 @@
     
 }
 
+#pragma marks -delegate methods Nsurlconnection
 
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
     return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
@@ -38,37 +49,6 @@
     return nil;
 }
 
-
--(void)serviceLoaded:(NSData*)data
-{
-    if(data){
-    
-        // Set appIcon and clear temporary data/image
-    
-    if( [self.imgLoad isKindOfClass:[UIImageView class]])
-        {
-        
-            UIImage *image = [[UIImage alloc] initWithData:data];
-
-            if( [self.imgLoad isKindOfClass:[UIImageView class]])
-                {
-                UIImageView *imgView=(UIImageView*)self.imgLoad;
-                [imgView setImage:image];
-                
-                }   
-            else
-                {
-                UIButton *btnView=(UIButton*)self.imgLoad;
-                [btnView setBackgroundImage:image forState:UIControlStateNormal];
-                }
-
-        
-        }
-
-    }
-    [delegate returnImages:self.imgLoad :self.key andActivityLoad:self.load];
-
-}
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -90,6 +70,45 @@
     [self serviceLoaded:self.activeDownload];
 
 }
+/*----------------------------------------------------------------------------------
+ Method Name: serviceLoaded
+ Parameters: NSData
+ Descriptions:
+ This method will recieve the image nsdata and will convert to UIImage . The UIImage
+ is in turn set to the UIImageView object in img.Load .
+ return type: nil
+ ----------------------------------------------------------------------------------*/
+-(void)serviceLoaded:(NSData*)data
+{
+    if(data){
+        
+        // Set appIcon and clear temporary data/image
+        
+        if( [self.imgLoad isKindOfClass:[UIImageView class]])
+        {
+            
+            UIImage *image = [[UIImage alloc] initWithData:data];
+            
+            if( [self.imgLoad isKindOfClass:[UIImageView class]])
+            {
+                UIImageView *imgView=(UIImageView*)self.imgLoad;
+                [imgView setImage:image];
+                
+            }
+            else
+            {
+                UIButton *btnView=(UIButton*)self.imgLoad;
+                [btnView setBackgroundImage:image forState:UIControlStateNormal];
+            }
+            
+            
+        }
+        
+    }
+    [delegate returnImages:self.imgLoad :self.key andActivityLoad:self.load];
+    
+}
+
 #pragma mark NSOperation Specific Methods
 
 -(NSData*)returnImageData:(NSDictionary *)resultData

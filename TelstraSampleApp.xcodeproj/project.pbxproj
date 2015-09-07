@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9623235E1B99BC2F0054296C /* Sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 9623235D1B99BC2E0054296C /* Sync.png */; };
+		9643BB281B9D5AE4000915FC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9643BB271B9D5AE4000915FC /* Constants.m */; };
 		96B7D1CE1B96C43E00DC5D5F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B7D1CD1B96C43E00DC5D5F /* main.m */; };
 		96B7D1D11B96C43E00DC5D5F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B7D1D01B96C43E00DC5D5F /* AppDelegate.m */; };
 		96B7D1D41B96C43E00DC5D5F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B7D1D31B96C43E00DC5D5F /* ViewController.m */; };
@@ -36,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		9623235D1B99BC2E0054296C /* Sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sync.png; sourceTree = "<group>"; };
+		9643BB261B9D5AE4000915FC /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		9643BB271B9D5AE4000915FC /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		96B7D1C81B96C43E00DC5D5F /* TelstraSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelstraSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B7D1CC1B96C43E00DC5D5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96B7D1CD1B96C43E00DC5D5F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -105,6 +108,8 @@
 				96B7D1D31B96C43E00DC5D5F /* ViewController.m */,
 				96B7D1F11B96C62300DC5D5F /* CustomCell.h */,
 				96B7D1F21B96C62300DC5D5F /* CustomCell.m */,
+				9643BB261B9D5AE4000915FC /* Constants.h */,
+				9643BB271B9D5AE4000915FC /* Constants.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -145,9 +150,9 @@
 			children = (
 				96B7D1D51B96C43E00DC5D5F /* Main.storyboard */,
 				96B7D1D81B96C43E00DC5D5F /* Images.xcassets */,
-				9623235F1B99BC3B0054296C /* Images */,
 				96B7D1DA1B96C43E00DC5D5F /* LaunchScreen.xib */,
 				96B7D1CB1B96C43E00DC5D5F /* Supporting Files */,
+				9623235F1B99BC3B0054296C /* Images */,
 				9623235C1B986C1B0054296C /* Classes */,
 			);
 			path = TelstraSampleApp;
@@ -285,6 +290,7 @@
 				96B7D1D11B96C43E00DC5D5F /* AppDelegate.m in Sources */,
 				96B7D1F61B96CBAD00DC5D5F /* AsyncServiceCall.m in Sources */,
 				96B7D1F31B96C62300DC5D5F /* CustomCell.m in Sources */,
+				9643BB281B9D5AE4000915FC /* Constants.m in Sources */,
 				96B7D1CE1B96C43E00DC5D5F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

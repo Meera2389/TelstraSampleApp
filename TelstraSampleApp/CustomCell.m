@@ -33,7 +33,7 @@
         
         CGSize size = [self findMessgeStringHeight:content];
 
-        self.descriptionImage=[[UIImageView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-ImagePadding,  self.descriptionTitle.frame.size.height+40, DescriptionImageHeight, DescriptionImageHeight)];
+        self.descriptionImage=[[UIImageView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-ImagePadding,  self.descriptionTitle.frame.size.height+DescriptionIndicatorHeight, DescriptionImageHeight, DescriptionImageHeight)];
         [self addSubview:self.descriptionImage];
         
         self.descriptionText=[[UILabel alloc]initWithFrame:CGRectMake(self.descriptionTitle.frame.origin.x, ImagePadding/2, [UIScreen mainScreen].bounds.size.width-(self.descriptionImage.frame.size.width+ImagePadding/2), size.height)];
